@@ -182,6 +182,7 @@
     <Content Include="Views\StoreManager\Details.cshtml" />
     <Content Include="Views\StoreManager\Edit.cshtml" />
     <Content Include="Views\StoreManager\Index.cshtml" />
+    <Content Include="Views\StoreManager\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

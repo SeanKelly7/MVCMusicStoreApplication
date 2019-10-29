@@ -1,0 +1,23 @@
+﻿@model MVCMusicStoreApplication.Models.Album
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div>
+	<dl>
+		<dd>
+			@Html.DisplayFor(model => model.Title)
+		</dd>
+		<dd>
+			@Html.DisplayFor(model => model.AlbumArtUrl)
+		</dd>
+		<dd>
+			<em>Artist: </em>@Html.DisplayFor(model => model.Artist.Name)
+		</dd>
+		<dd>
+			<em>Price: </em>@Html.DisplayFor(model => model.Price)
+		</dd>
+	</dl>
+	@Html.ActionLink("Add to cart", "AddToCart", new {@class = "btn btn-primary"})
+</div>

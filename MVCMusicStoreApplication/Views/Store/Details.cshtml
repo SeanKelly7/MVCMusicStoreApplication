@@ -19,5 +19,8 @@
 			<em>Price: </em>@Html.DisplayFor(model => model.Price)
 		</dd>
 	</dl>
-	@Html.ActionLink("Add to cart", "AddToCart", new {@class = "btn btn-primary"})
 </div>
+<button>
+	@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.AlbumId }, null)
+</button>
+

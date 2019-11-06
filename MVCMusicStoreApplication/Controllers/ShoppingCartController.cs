@@ -7,12 +7,13 @@ using MVCMusicStoreApplication.Models;
 
 namespace MVCMusicStoreApplication.Controllers
 {
-    public class ShoppingCartController : Controller
-    {
+	public class ShoppingCartController : Controller
+	{
 		MVCMusicStoreDB db = new MVCMusicStoreDB();
-        // GET: ShoppingCart
-        public ActionResult Index()
-        {
+
+		// GET: ShoppingCart
+		public ActionResult Index()
+		{
 			ShoppingCart cart = ShoppingCart.GetCart(this.HttpContext);
 
 			ShoppingCartViewModel vm = new ShoppingCartViewModel()
@@ -20,31 +21,37 @@ namespace MVCMusicStoreApplication.Controllers
 				CartItems = cart.GetCartItems(),
 				CartTotal = cart.GetCartTotal()
 			};
-			return View(vm);
-        }
 
+			return View(vm);
+		}
+
+		// GET: ShoppingCart/AddToCart/7
 		public ActionResult AddToCart(int id)
 		{
 			ShoppingCart cart = ShoppingCart.GetCart(this.HttpContext);
 			cart.AddToCart(id);
 			return RedirectToAction("Index");
 		}
+
+		// POST: ShopingCart/RemoveFromCart/7
 		[HttpPost]
 		public ActionResult RemoveFromCart(int id)
 		{
 			ShoppingCart cart = ShoppingCart.GetCart(this.HttpContext);
+
 			Album album = db.Carts.SingleOrDefault(c => c.RecordId == id).AlbumSelected;
+
 			int newItemCount = cart.RemoveFromCart(id);
-			cart.RemoveFromCart(id);
+
 			ShoppingCartRemoveViewModel vm = new ShoppingCartRemoveViewModel()
 			{
 				DeleteId = id,
 				CartTotal = cart.GetCartTotal(),
 				ItemCount = newItemCount,
-				Message=album.Title + " has been removed from the cart"
+				Message = album.Title + " has been removed from the cart"
 			};
 
 			return Json(vm);
 		}
-    }
+	}
 }
